@@ -111,7 +111,7 @@ module CarrierWave
       def store!(file)
         stored = CarrierWave::Storage::GridFS::File.new(uploader, uploader.store_path)
         stored.write(file)
-        CarrierWave::SanitizedFile.new(stored)
+        stored
       end
 
       ##
@@ -126,8 +126,7 @@ module CarrierWave
       # [CarrierWave::Storage::GridFS::File] a sanitized file
       #
       def retrieve!(identifier)
-        file = CarrierWave::Storage::GridFS::File.new(uploader, uploader.store_path(identifier))
-        CarrierWave::SanitizedFile.new(file)
+        CarrierWave::Storage::GridFS::File.new(uploader, uploader.store_path(identifier))
       end
 
     end # File
